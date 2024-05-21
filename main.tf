@@ -12,13 +12,7 @@
 #   skip_service_principal_aad_check = true
 # }
 
-# resource "azurerm_container_registry" "acr" {
-#   name                = var.acr_name
-#   resource_group_name = azurerm_resource_group.aks-rg.name
-#   location            = var.location
-#   sku                 = "Standard"
-#   admin_enabled       = false
-# }
+
 
 # resource "azurerm_kubernetes_cluster" "aks" {
 #   name                = var.cluster_name
@@ -83,6 +77,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id      = azurerm_subnet.aks_subnet.id
   }
 
+#   resource "azurerm_container_registry" "acr" {
+#   name                = var.acr_name
+#   resource_group_name = azurerm_resource_group.aks-rg.name
+#   location            = var.location
+#   sku                 = "Standard"
+#   admin_enabled       = true
+# }
+
   identity {
     type = "SystemAssigned"
   }
@@ -92,3 +94,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
     network_plugin    = "azure" // Change to 'azure' to use Azure CNI
   }
 }
+
+resource "azurerm_container_registry" "acr" {
+  name                = var.acr_name
+  resource_group_name = azurerm_resource_group.aks-rg.name
+  location            = var.location
+  sku                 = "Standard"
+  admin_enabled       = true
+}
+

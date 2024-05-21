@@ -1,0 +1,16 @@
+image:
+  repository: myacr321012ulan.azurecr.io/my-python-appulan
+  tag: 7.7.7
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

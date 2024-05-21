@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "my-python-appulan-chart.fullname" . }}
+  labels:
+    app: {{ include "my-python-appulan-chart.name" . }}
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: {{ include "my-python-appulan-chart.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "my-python-appulan-chart.name" . }}
+    spec:
+      containers:
+        - name: {{ include "my-python-appulan-chart.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 80
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
