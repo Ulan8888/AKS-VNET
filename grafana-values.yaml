@@ -1,0 +1,17 @@
+service:
+  type: LoadBalancer
+  labels:
+    app: grafana
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://prometheus-server.tools.svc.cluster.local
+        isDefault: true
+
+adminUser: admin
+adminPassword: admin

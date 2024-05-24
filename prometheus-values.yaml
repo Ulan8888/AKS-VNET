@@ -1,0 +1,13 @@
+server:
+  service:
+    type: NodePort
+    nodePort: 30007  # Ensure this port is available
+  labels:
+    app: prometheus
+    component: server
+
+nodeExporter:
+  enabled: true
+
+kubeStateMetrics:
+  enabled: true
